@@ -1,422 +1,144 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luidil Góis | Desenvolvedor Web</title>
-    <style>
-        /* VARIÁVEIS DE CORES */
-        :root {
-            --primary: #2563eb;
-            --secondary: #1e40af;
-            --dark: #1e293b;
-            --light: #f1f5f9;
-            --gray: #64748b;
-        }
-
-        /* RESET E ESTILOS GERAIS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #fff;
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            font-size: 2.5rem;
-            color: var(--dark);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* HEADER */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: var(--dark);
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--primary);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
-            color: white;
-            padding: 180px 0 100px;
-            text-align: center;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-
-        /* SERVIÇOS */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .service:hover {
-            transform: translateY(-10px);
-        }
-
-        .service i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .service h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        /* PORTFÓLIO */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .portfolio-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 300px;
-            background-color: #eee;
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(37, 99, 235, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .portfolio-item:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .overlay a {
-            color: white;
-            text-decoration: none;
-            border: 2px solid white;
-            padding: 8px 20px;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .overlay a:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        /* CONTATO */
-        .contact {
-            background-color: var(--light);
-        }
-
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            display: grid;
-            gap: 20px;
-        }
-
-        form input, form textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        form textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        /* FOOTER */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 30px 0;
-            text-align: center;
-        }
-
-        footer .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .social {
-            margin-top: 20px;
-        }
-
-        .social a {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 15px;
-            transition: color 0.3s;
-        }
-
-        .social a:hover {
-            color: var(--primary);
-        }
-
-        /* RESPONSIVIDADE */
-        @media (max-width: 768px) {
-            header .container {
-                flex-direction: column;
-            }
-
-            nav ul {
-                margin-top: 20px;
-            }
-
-            nav ul li {
-                margin: 0 10px;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luidil Góis | Desenvolvedor Full Stack</title>
+<meta name="description" content="Luidil Góis — Desenvolvedor Full Stack. Sites institucionais, e-commerce, landing pages e SaaS.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--card:#16161f;--line:#24242f;--text:#e7e7ee;--muted:#9a9aae;--acc:#7c5cff;--acc2:#22d3ee}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.mono{font-family:'JetBrains Mono',monospace}
+header{position:sticky;top:0;z-index:10;background:rgba(10,10,15,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-weight:800;font-size:1.15rem}.logo span{color:var(--acc)}
+nav a{margin-left:28px;color:var(--muted);font-size:.92rem}nav a:hover{color:var(--text)}
+.hero{padding:110px 0 90px;position:relative;overflow:hidden}
+.hero:before{content:'';position:absolute;inset:-200px -200px auto auto;width:600px;height:600px;background:radial-gradient(circle,rgba(124,92,255,.25),transparent 60%)}
+.tag{display:inline-flex;gap:8px;align-items:center;font-size:.8rem;color:var(--acc2);border:1px solid var(--line);padding:6px 12px;border-radius:999px;background:var(--bg2)}
+.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.1;margin:22px 0 18px;letter-spacing:-.03em}
+h1 .g{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:1.15rem;max-width:620px}
+.cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.btn{padding:12px 22px;border-radius:10px;font-weight:600;font-size:.95rem;transition:.2s}
+.btn.p{background:var(--acc);color:#fff}.btn.p:hover{filter:brightness(1.15)}
+.btn.o{border:1px solid var(--line)}.btn.o:hover{border-color:var(--acc)}
+section{padding:80px 0;border-top:1px solid var(--line)}
+.eyebrow{color:var(--acc2);font-size:.8rem;letter-spacing:.15em;text-transform:uppercase}
+h2{font-size:2rem;margin:8px 0 36px;letter-spacing:-.02em}
+.grid{display:grid;gap:18px}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;transition:.2s}
+.card:hover{border-color:var(--acc);transform:translateY(-3px)}
+.card h3{font-size:1.1rem;margin-bottom:8px}.card p{color:var(--muted);font-size:.93rem}
+.ico{font-size:1.5rem;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-size:.75rem;padding:4px 10px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);color:var(--muted)}
+.proj{display:flex;flex-direction:column}.proj .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.badge{font-size:.7rem;color:var(--acc);border:1px solid rgba(124,92,255,.4);padding:2px 8px;border-radius:6px}
+.proj .links{margin-top:auto;padding-top:16px;display:flex;gap:16px;font-size:.88rem;color:var(--acc2)}
+.feat{grid-template-columns:repeat(auto-fit,minmax(420px,1fr))}
+@media(max-width:600px){.feat{grid-template-columns:1fr}nav a:not(:last-child){display:none}}
+.contact{text-align:center}.contact .lead{margin:0 auto 30px}
+.socials{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+footer{padding:30px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;text-align:center}
+#lang{margin-left:24px;background:var(--bg2);border:1px solid var(--line);color:var(--text);padding:5px 10px;border-radius:8px;cursor:pointer;font-size:.8rem}#lang:hover{border-color:var(--acc)}
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <a href="#" class="logo">Luidil<span>Góis</span></a>
-            <nav>
-                <ul>
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#services">Serviços</a></li>
-                    <li><a href="#portfolio">Portfólio</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header><div class="wrap"><a href="#home" class="logo">Luidil<span>.</span>Góis</a>
+<nav><a href="#services">Serviços</a><a href="#projects">Projetos</a><a href="#stack">Stack</a><a href="#contact">Contato</a><button id="lang" class="mono" aria-label="Idioma">EN</button></nav></div></header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Criação de Sites Profissionais e Modernos</h1>
-                <p>Transformo suas ideias em realidade digital com soluções rápidas, responsivas e otimizadas para resultados</p>
-                <a href="#contact" class="btn">Solicitar Orçamento</a>
-            </div>
-        </div>
-    </section>
+<main id="home">
+<div class="hero"><div class="wrap">
+<span class="tag mono"><i class="dot"></i>Disponível para novos projetos</span>
+<h1>Olá, eu sou <span class="g">Luidil Góis</span>.<br>Desenvolvedor Full Stack.</h1>
+<p class="lead">Do front-end ao banco de dados: sistemas SaaS, APIs, lojas virtuais, sites e landing pages — rápidos, responsivos e otimizados para resultados.</p>
+<div class="cta"><a class="btn p" href="#contact">Solicitar orçamento</a><a class="btn o" href="#projects">Ver projetos →</a></div>
+<div class="cta" style="margin-top:14px"><a class="btn o" href="https://br.linkedin.com/in/luidil-g%C3%B3is-6a77871a1" target="_blank" rel="noopener">in LinkedIn</a><a class="btn o" href="https://github.com/Luidil" target="_blank" rel="noopener">GitHub ↗</a></div>
+</div></div>
 
-    <!-- Serviços -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Meus Serviços</h2>
-            <div class="services-grid">
-                <div class="service">
-                    <i>💼</i>
-                    <h3>Sites Institucionais</h3>
-                    <p>Presença online profissional para empresas, com design moderno e responsivo</p>
-                </div>
-                <div class="service">
-                    <i>🛒</i>
-                    <h3>E-commerce</h3>
-                    <p>Lojas virtuais completas, integradas com meios de pagamento e gestão de produtos</p>
-                </div>
-                <div class="service">
-                    <i>📱</i>
-                    <h3>Landing Pages</h3>
-                    <p>Páginas de alta conversão para campanhas de marketing e lançamentos</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="services"><div class="wrap">
+<div class="eyebrow mono">// serviços</div><h2>O que eu faço</h2>
+<div class="grid g3">
+<div class="card"><div class="ico">💼</div><h3>Sites Institucionais</h3><p>Presença online profissional para empresas, com design moderno e responsivo.</p></div>
+<div class="card"><div class="ico">🛒</div><h3>E-commerce</h3><p>Lojas virtuais completas, integradas com meios de pagamento e gestão de produtos.</p></div>
+<div class="card"><div class="ico">📱</div><h3>Landing Pages</h3><p>Páginas de alta conversão para campanhas de marketing e lançamentos.</p></div>
+<div class="card"><div class="ico">⚙️</div><h3>Sistemas & SaaS</h3><p>Aplicações full stack sob medida com login, painel administrativo, banco de dados e pagamentos.</p></div>
+</div></div></section>
 
-    <!-- Portfólio -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2 class="section-title">Projetos Recentes</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Site Corporativo">
-                    <div class="overlay">
-                        <h3>Site Corporativo</h3>
-                        <a href="#">Ver Detalhes</a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="E-commerce">
-                    <div class="overlay">
-                        <h3>Loja Virtual</h3>
-                        <a href="#">Ver Detalhes</a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Landing Page">
-                    <div class="overlay">
-                        <h3>Landing Page</h3>
-                        <a href="#">Ver Detalhes</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="projects"><div class="wrap">
+<div class="eyebrow mono">// projetos</div><h2>Projetos em destaque</h2>
+<div class="grid feat" style="margin-bottom:18px">
+<div class="card proj"><div class="top"><h3>Clinvax</h3><span class="badge mono">SaaS</span></div>
+<p>Sistema de gestão para clínicas: agenda, pacientes, equipe e cobrança online integrada ao Mercado Pago.</p>
+<div class="chips"><span class="chip">Full-stack</span><span class="chip">PostgreSQL</span><span class="chip">Mercado Pago</span><span class="chip">Netlify</span></div>
+<div class="links"><a href="https://clinvax.netlify.app" target="_blank" rel="noopener">Ver site ↗</a></div></div>
+<div class="card proj"><div class="top"><h3>Valeu Ofertas</h3><span class="badge mono">Produto</span></div>
+<p>Plataforma de ofertas e cupons que reúne promoções de Shopee, Mercado Livre, AliExpress e Amazon, com histórico de preços.</p>
+<div class="chips"><span class="chip">API REST</span><span class="chip">PostgreSQL</span><span class="chip">Integrações</span><span class="chip">Render</span></div>
+<div class="links"><a href="https://valeuofertas.netlify.app" target="_blank" rel="noopener">Ver site ↗</a></div></div>
+</div>
+<div class="grid g3">
+<div class="card proj"><div class="top"><h3>DKMimos</h3><span class="badge mono">E-commerce</span></div><p>Landing page de e-commerce para acessórios e presentes.</p>
+<div class="chips"><span class="chip">HTML/CSS</span></div>
+<div class="links"><a href="https://dkmimos.netlify.app" target="_blank" rel="noopener">Site ↗</a><a href="https://github.com/Luidil/DKMimos" target="_blank" rel="noopener">Código</a></div></div>
+<div class="card proj"><div class="top"><h3>Comparador de Transportes</h3><span class="badge mono">App</span></div><p>Comparação de opções de transporte com interface simples e prática.</p>
+<div class="chips"><span class="chip">HTML/CSS</span></div>
+<div class="links"><a href="https://comparadordetransportes.netlify.app" target="_blank" rel="noopener">Site ↗</a><a href="https://github.com/Luidil/Comparador-de-Transportes" target="_blank" rel="noopener">Código</a></div></div>
+<div class="card proj"><div class="top"><h3>Casamento Rafaela & Uilson</h3><span class="badge mono">Landing</span></div><p>Site de casamento com confirmação de presença (RSVP), local do evento e design elegante.</p>
+<div class="chips"><span class="chip">JavaScript</span><span class="chip">RSVP</span></div>
+<div class="links"><a href="https://casamentorafaelaeuilson.netlify.app" target="_blank" rel="noopener">Site ↗</a><a href="https://github.com/Luidil/Casamento-Rafaela-e-Uilson" target="_blank" rel="noopener">Código</a></div></div>
+<div class="card proj"><div class="top"><h3>JM Advocacia</h3><span class="badge mono">Institucional</span></div><p>Site institucional para escritório de advocacia.</p>
+<div class="chips"><span class="chip">HTML/CSS</span></div>
+<div class="links"><a href="https://jmadvocacia.netlify.app" target="_blank" rel="noopener">Site ↗</a><a href="https://github.com/Luidil/JMADVOCACIA" target="_blank" rel="noopener">Código</a></div></div>
+<div class="card proj"><div class="top"><h3>FitHub</h3><span class="badge mono">Protótipo</span></div><p>Protótipo de plataforma fitness.</p>
+<div class="chips"><span class="chip">JavaScript</span><span class="chip">Protótipo</span></div>
+<div class="links"><a href="https://fithubprototipo.netlify.app" target="_blank" rel="noopener">Site ↗</a><a href="https://github.com/Luidil/FitHub---Prot-tipo-" target="_blank" rel="noopener">Código</a></div></div>
+<div class="card proj"><div class="top"><h3>Fotos da Vó</h3><span class="badge mono">App</span></div><p>Álbum de família colaborativo: qualquer pessoa envia fotos, vídeos e histórias via QR code.</p>
+<div class="chips"><span class="chip">TypeScript</span><span class="chip">Upload de mídia</span></div>
+<div class="links"><a href="https://momentoscompartilhados.netlify.app" target="_blank" rel="noopener">Site ↗</a></div></div>
+<div class="card proj"><div class="top"><h3>Sorteador Voo Alto</h3><span class="badge mono">Educação</span></div><p>Gerador de problemas matemáticos por sorteio para uso em sala de aula, com histórico.</p>
+<div class="chips"><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span></div>
+<div class="links"><a href="https://sorteadorrafa.netlify.app" target="_blank" rel="noopener">Site ↗</a></div></div>
+<div class="card proj"><div class="top"><h3>Espaço Tour 360</h3><span class="badge mono">SaaS</span></div><p>Tour virtual 360° para condomínios, com área logada.</p>
+<div class="chips"><span class="chip">TypeScript</span><span class="chip">Docker</span><span class="chip">360°</span></div>
+<div class="links"><a href="https://espacotour.netlify.app" target="_blank" rel="noopener">Site ↗</a></div></div>
+<div class="card proj"><div class="top"><h3>RodoMix Auditoria</h3><span class="badge mono">Sistema</span></div><p>Sistema de auditoria para o Grupo RodoMix.</p>
+<div class="chips"><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span></div>
+<div class="links"><a href="https://rodomixauditoria.netlify.app" target="_blank" rel="noopener">Site ↗</a></div></div>
+<div class="card proj"><div class="top"><h3>Cotações de Coberturas</h3><span class="badge mono">Sistema</span></div><p>Sistema interno de cotações de coberturas e diárias, com login, quadro de solicitações e dashboard.</p>
+<div class="chips"><span class="chip">JavaScript</span><span class="chip">Dashboard</span><span class="chip">Autenticação</span></div>
+<div class="links"><a href="https://cotacoesecoberturasgruposolucaoecia.netlify.app" target="_blank" rel="noopener">Site ↗</a></div></div>
+</div></div></section>
 
-    <!-- Contato -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Entre em Contato</h2>
-            <form>
-                <input type="text" placeholder="Luidil Góis" required>
-                <input type="email" placeholder="Seu Email" required>
-                <textarea placeholder="Sua Mensagem" required></textarea>
-                <button type="submit" class="btn">Enviar Mensagem</button>
-            </form>
-        </div>
-    </section>
+<section id="stack"><div class="wrap">
+<div class="eyebrow mono">// tecnologias</div><h2>Stack & prática</h2>
+<div class="chips" style="gap:10px">
+<span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Node.js</span><span class="chip">PostgreSQL</span><span class="chip">APIs REST</span><span class="chip">Integração de pagamentos</span><span class="chip">Netlify</span><span class="chip">Render</span><span class="chip">Git & GitHub</span><span class="chip">Design responsivo</span>
+</div></div></section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Luidil Góis. Todos os direitos reservados.</p>
-            <div class="social">
-                <a href="#">https://br.linkedin.com/in/luidil-g%C3%B3is-6a77871a1</a>
-                <a href="#">https://github.com/Luidil?tab=projects</a>
-                <a href="#">https://www.instagram.com/goisluidil/</a>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+<section id="contact" class="contact"><div class="wrap">
+<div class="eyebrow mono">// contato</div><h2>Vamos tirar seu projeto do papel?</h2>
+<p class="lead">Me chame em qualquer uma das redes abaixo e eu respondo com um orçamento.</p>
+<div class="socials">
+<a class="btn p" href="https://br.linkedin.com/in/luidil-g%C3%B3is-6a77871a1" target="_blank" rel="noopener">LinkedIn</a>
+<a class="btn o" href="https://github.com/Luidil" target="_blank" rel="noopener">GitHub</a>
+<a class="btn o" href="https://www.instagram.com/goisluidil/" target="_blank" rel="noopener">Instagram</a>
+</div></div></section>
+</main>
+<footer><div style="margin-bottom:8px"><a href="https://br.linkedin.com/in/luidil-g%C3%B3is-6a77871a1" target="_blank" rel="noopener" style="color:var(--acc2);margin:0 10px">LinkedIn</a><a href="https://github.com/Luidil" target="_blank" rel="noopener" style="color:var(--acc2);margin:0 10px">GitHub</a></div>© <span id="y">2026</span> Luidil Góis. Todos os direitos reservados.</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script>
+const D={"Disponível para novos projetos": "Available for new projects", "Olá, eu sou": "Hi, I'm", "Desenvolvedor Full Stack.": "Full Stack Developer.", "Do front-end ao banco de dados: sistemas SaaS, APIs, lojas virtuais, sites e landing pages — rápidos, responsivos e otimizados para resultados.": "From front end to database: SaaS systems, APIs, online stores, websites and landing pages — fast, responsive and built for results.", "Solicitar orçamento": "Get a quote", "Ver projetos →": "See projects →", "Serviços": "Services", "Projetos": "Projects", "Contato": "Contact", "// serviços": "// services", "// projetos": "// projects", "// tecnologias": "// technologies", "// contato": "// contact", "O que eu faço": "What I do", "Sites Institucionais": "Business Websites", "Presença online profissional para empresas, com design moderno e responsivo.": "Professional online presence for companies, with modern, responsive design.", "Lojas virtuais completas, integradas com meios de pagamento e gestão de produtos.": "Complete online stores, integrated with payment methods and product management.", "Páginas de alta conversão para campanhas de marketing e lançamentos.": "High-conversion pages for marketing campaigns and launches.", "Sistemas & SaaS": "Systems & SaaS", "Aplicações full stack sob medida com login, painel administrativo, banco de dados e pagamentos.": "Custom full stack applications with login, admin dashboard, database and payments.", "Projetos em destaque": "Featured projects", "Sistema de gestão para clínicas: agenda, pacientes, equipe e cobrança online integrada ao Mercado Pago.": "Clinic management system: scheduling, patients, staff and online billing integrated with Mercado Pago.", "Plataforma de ofertas e cupons que reúne promoções de Shopee, Mercado Livre, AliExpress e Amazon, com histórico de preços.": "Deals and coupons platform aggregating Shopee, Mercado Livre, AliExpress and Amazon promotions, with price history.", "Produto": "Product", "Ver site ↗": "Visit site ↗", "Código": "Code", "Landing page de e-commerce para acessórios e presentes.": "E-commerce landing page for accessories and gifts.", "Comparador de Transportes": "Transport Comparator", "Comparação de opções de transporte com interface simples e prática.": "Compares transport options with a simple, practical interface.", "Casamento Rafaela & Uilson": "Rafaela & Uilson Wedding", "Site de casamento com confirmação de presença (RSVP), local do evento e design elegante.": "Wedding website with RSVP, event location and elegant design.", "Institucional": "Business", "Site institucional para escritório de advocacia.": "Business website for a law firm.", "Protótipo": "Prototype", "Protótipo de plataforma fitness.": "Fitness platform prototype.", "Fotos da Vó": "Grandma's Photos", "Álbum de família colaborativo: qualquer pessoa envia fotos, vídeos e histórias via QR code.": "Collaborative family album: anyone can add photos, videos and stories via QR code.", "Educação": "Education", "Sorteador Voo Alto": "Voo Alto Randomizer", "Gerador de problemas matemáticos por sorteio para uso em sala de aula, com histórico.": "Random math problem generator for classroom use, with history.", "Tour virtual 360° para condomínios, com área logada.": "360° virtual tour for residential condominiums, with a members area.", "Sistema": "System", "RodoMix Auditoria": "RodoMix Audit", "Sistema de auditoria para o Grupo RodoMix.": "Audit system for Grupo RodoMix.", "Cotações de Coberturas": "Coverage Quotes", "Sistema interno de cotações de coberturas e diárias, com login, quadro de solicitações e dashboard.": "Internal system for staffing coverage and daily-rate quotes, with login, request board and dashboard.", "Stack & prática": "Stack & practice", "Vamos tirar seu projeto do papel?": "Let's bring your project to life?", "Me chame em qualquer uma das redes abaixo e eu respondo com um orçamento.": "Reach out on any of the channels below and I'll get back to you with a quote.", "Luidil Góis. Todos os direitos reservados.": "Luidil Góis. All rights reserved.", "Upload de mídia": "Media upload", "Autenticação": "Authentication", "Integração de pagamentos": "Payment integration", "Design responsivo": "Responsive design", "Integrações": "Integrations"},M={title:["Luidil Góis | Desenvolvedor Full Stack","Luidil Góis | Full Stack Developer"],desc:["Luidil Góis — Desenvolvedor Full Stack. Sistemas SaaS, APIs, e-commerce, sites e landing pages.","Luidil Góis — Full Stack Developer. SaaS systems, APIs, e-commerce, websites and landing pages."]};
+const nodes=[];const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
+while(n=w.nextNode()){const t=n.nodeValue.trim();if(D[t])nodes.push([n,n.nodeValue,n.nodeValue.replace(t,D[t])]);}
+function setLang(l){const en=l==='en';nodes.forEach(([n,pt,e])=>n.nodeValue=en?e:pt);document.documentElement.lang=en?'en':'pt-BR';
+document.title=M.title[+en];document.querySelector('meta[name=description]').content=M.desc[+en];
+const b=document.getElementById('lang');b.textContent=en?'PT':'EN';b.setAttribute('aria-label',en?'Mudar para português':'Switch to English');localStorage.setItem('lang',l);}
+document.getElementById('lang').onclick=()=>setLang(document.documentElement.lang==='en'?'pt':'en');
+setLang(localStorage.getItem('lang')||((navigator.language||'pt').toLowerCase().startsWith('pt')?'pt':'en'));
+</script>
+</body></html>
